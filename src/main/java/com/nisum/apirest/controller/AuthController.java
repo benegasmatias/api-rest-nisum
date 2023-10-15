@@ -20,7 +20,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")  // Ruta para la autenticación de inicio de sesión
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         try {
             // Llama al servicio para autenticar al usuario

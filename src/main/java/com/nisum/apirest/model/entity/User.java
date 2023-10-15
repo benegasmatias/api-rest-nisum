@@ -30,6 +30,8 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modified")
     private Date modified;
+
+    private Date lasLogin;
     public User() {
 
     }

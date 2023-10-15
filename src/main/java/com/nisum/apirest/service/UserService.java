@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -63,9 +64,7 @@ public class UserService {
         // Buscar el usuario por dirección de correo electrónico
         User user = userRepository.findByEmail(email).orElseThrow(() ->  new UserNotFoundException("Usuario no encontrado"));
 
-
-
-
+        user.setLasLogin(new Date());
         // Verificar la contraseña
         if (!passwordEncoder.matches(password, user.getPassword())) {
             // La contraseña no coincide, maneja el error
@@ -75,7 +74,6 @@ public class UserService {
         // Si la autenticación es exitosa, puedes generar un token
         String token = generateToken();
 
-        // Crear un objeto UserResponseDTO con la información del usuario
         AuthResponseDTO userResponseDTO = new AuthResponseDTO();
         userResponseDTO.setId(user.getId());
         userResponseDTO.setCreated(user.getCreated());
